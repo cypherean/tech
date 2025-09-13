@@ -39,6 +39,20 @@
   });
 }(jQuery));
 </script>
+<script>
+(function($){
+  "use strict";
+  var navbarCollapse = function () {
+    if ($("#mainNav").offset().top > -1) {
+      $("#mainNav").addClass("navbar-shrink");
+    } else {
+      $("#mainNav").removeClass("navbar-shrink");
+    }
+  };
+  navbarCollapse();
+  $(window).on('scroll', navbarCollapse);
+})(jQuery);
+</script>
 {% if site.google_analytics %}
 {% include google_analytics.html %}
 {% endif %}
