@@ -53,6 +53,23 @@
   $(window).on('scroll', navbarCollapse);
 })(jQuery);
 </script>
+<script>
+(function(){
+  // Mark active nav link based on current location
+  var current = window.location.pathname;
+  var links = document.querySelectorAll('#mainNav .nav-link');
+  Array.prototype.forEach.call(links, function(link){
+    var href = link.getAttribute('href');
+    if (!href) return;
+    try {
+      var url = new URL(href, window.location.origin);
+      if (url.pathname === current || (current.startsWith('/tech') && url.pathname === '/tech/')) {
+        link.classList.add('active');
+      }
+    } catch(e) {}
+  });
+})();
+</script>
 {% if site.google_analytics %}
 {% include google_analytics.html %}
 {% endif %}
