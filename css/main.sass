@@ -64,6 +64,8 @@ body
   font-family: $font-sans
   margin: 0
   padding: 0
+  // Offset for fixed-top navbar so content isn't covered
+  padding-top: 90px
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-font-feature-settings: "liga=1, dlig=1"
@@ -108,7 +110,7 @@ body
     text-indent: -9999px
 
 .blog-header
-  padding-top: 80px
+  padding-top: 16px
   width: 100%
   max-width: 960px
   margin: 0 auto
@@ -218,6 +220,10 @@ body
     font-size: $rs/8*5
     text-transform: uppercase
     letter-spacing: 1px
+
+// Extra space above the Featured section
+.index-headline.featured
+  margin-top: 16px
 
 .archive-template
   .index-headline.featured
