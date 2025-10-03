@@ -211,6 +211,7 @@ body
       font-style: normal
       font-size: 20px
       line-height: 1.3
+      font-family: $font-sans
     color: #4a4a4a
     .post-meta
       font-size: 14px
@@ -259,6 +260,10 @@ body
 // Extra space above the Featured section
 .index-headline.featured
   margin-top: 16px
+
+// Hide legacy section headers if still present
+.content > .index-headline
+  display: none
 
 .archive-template
   .index-headline.featured
@@ -439,7 +444,7 @@ body
       text-overflow: ellipsis
   .post-content
     width: 100%
-    font-family: $font-serif
+    font-family: $font-sans
     color: #333
     h1, h2, h3
       font-family: $font-sans
