@@ -56,18 +56,18 @@
 <script>
 (function(){
   // Mark active nav link based on current location
-  var current = window.location.pathname;
-  var links = document.querySelectorAll('#mainNav .nav-link');
-  Array.prototype.forEach.call(links, function(link){
-    var href = link.getAttribute('href');
-    if (!href) return;
-    try {
-      var url = new URL(href, window.location.origin);
-      if (url.pathname === current || (current.startsWith('/tech') && url.pathname === '/tech/')) {
-        link.classList.add('active');
+  var current = window.location.pathname.replace(/\/$/, '');
+  try {
+    var techLink = document.getElementById('nav-tech');
+    if (techLink) {
+      var techPath = new URL(techLink.href, window.location.origin).pathname.replace(/\/$/, '');
+      if (current === techPath || current.indexOf(techPath + '/') === 0) {
+        techLink.classList.add('active');
+      } else {
+        techLink.classList.remove('active');
       }
-    } catch(e) {}
-  });
+    }
+  } catch(e) {}
 })();
 </script>
 {% if site.google_analytics %}

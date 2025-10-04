@@ -27,9 +27,10 @@ layout: default
       {% assign posts_sorted = paginator.posts | sort: 'date' | reverse %}
       {% for post in posts_sorted %}
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <a class="post-card-link" href="{{ post.url | prepend: site.baseurl }}" itemprop="url">
           <div class="article-item{% if post.tags contains 'featured' %} is-featured{% endif %}">
             <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="{{ post.url | prepend: site.baseurl }}" itemprop="url">{{ post.title }}</a></h2>
+              <h2 class="post-title" itemprop="name">{{ post.title }}</h2>
             </header>
             <section class="post-excerpt" itemprop="description">
               <p>{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
@@ -39,6 +40,7 @@ layout: default
 <!--            <span class="post-tags-set">on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}}</span>-->
             </div>
           </div>
+          </a>
         </article>
       {% endfor %}
     </div>

@@ -43,16 +43,20 @@ $font-sans: 'Nunito', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "He
     background-image: linear-gradient(#64a19d, #64a19d)
     background-repeat: no-repeat
     background-position: 0 100%
-    background-size: 0% 2px
+    background-size: 0% 4px
     transition: color 150ms ease, background-size 150ms ease
     &:hover
       color: #64a19d
-      background-size: 100% 2px
+      background-size: 100% 4px
   .nav-item .nav-link
     border-bottom: none
   .nav-item .nav-link.active
     color: #64a19d
-    background-size: 100% 2px
+    background-size: 100% 4px
+  // Force active state styling
+  #mainNav .nav-link.active
+    color: #64a19d !important
+    background-size: 100% 4px !important
   &.navbar-shrink
     background-color: #fff
     .navbar-brand
@@ -115,15 +119,15 @@ body
     text-indent: -9999px
 
 .blog-header
-  padding-top: 16px
+  padding-top: 24px
   width: 100%
-  max-width: 960px
+  max-width: 1100px
   margin: 0 auto
   position: relative
   padding: 0
   @include box-sizing(border-box)
   @include respond-to(800)
-    padding: 0 $rs
+    padding: 0
   .blog-logo
     width: $rs*7.5
     height: $rs*7.5
@@ -143,7 +147,7 @@ body
   .blog-title
     margin: 0
     padding: $rs*1.25 $rs $rs/2
-    font-size: 32px
+    font-size: 28px
     text-align: left
     font-weight: 700
     letter-spacing: -1px
@@ -153,7 +157,7 @@ body
     color: #333
   .blog-description
     margin: 0 0 24px
-    padding: 0 $rs*2 12px
+    padding: 0 0 12px
     font-size: $rs/8*9
     line-height: 1.5
     color: #666
@@ -172,11 +176,12 @@ body
 
 .content
   width: 100%
-  max-width: 960px
+  font-family: $font-sans
+  max-width: 1100px
   margin: 0 auto
   @include box-sizing(border-box)
   @include respond-to(800)
-    padding: 0 $rs*2
+    padding: 0
   article
     padding: 0
     border-bottom: 0
@@ -188,12 +193,12 @@ body
       font-weight: 700
       font-style: normal
       display: block
-      font-size: 32px
+      font-size: 24px
       line-height: 1.1
-      margin: 0 0
+      margin: 0 0 8px
       a
         text-decoration: none
-    color: #222
+        color: #212529
         &:hover
           text-decoration: none
     .article-item
@@ -201,21 +206,27 @@ body
       border: 1px solid #eaeaea
       border-radius: 12px
       padding: 22px
+      position: relative
+      overflow: hidden
       transition: box-shadow 150ms ease, transform 150ms ease
       &:hover
         box-shadow: 0 8px 20px rgba(0,0,0,0.05)
         transform: translateY(-2px)
+    a.post-card-link
+      text-decoration: none
+      color: inherit
     .post-excerpt
       letter-spacing: -0.02em
       font-weight: 300
       font-style: normal
-      font-size: 20px
-      line-height: 1.3
-      font-family: $font-sans
-    color: #4a4a4a
+      font-size: 1.2rem
+      line-height: 1.6
+      color: #00000080
+      p
+        margin: 0 0 12px
     .post-meta
       font-size: 14px
-      color: #b3b3b1
+      color: #212529
       line-height: 30px
       margin-top: 6px
       time
@@ -223,7 +234,7 @@ body
         background: #f5f5f5
         border-radius: 999em
         padding: 2px 10px
-        font-size: 12px
+        font-size: 14px
         color: #888
       a
         color: #b3b3b1
@@ -242,7 +253,17 @@ body
 
 // Accent for featured posts only
 .article-item.is-featured
-  border-left: 4px solid #64a19d
+  border-left: 0
+  &::before
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    bottom: 0
+    width: 6px
+    background: #64a19d
+    border-top-left-radius: 12px
+    border-bottom-left-radius: 12px
 
 .post-template .content
   max-width: 700px
@@ -366,7 +387,7 @@ body
       font-weight: 700
       font-style: normal
       letter-spacing: -0.04em
-      font-size: 50px
+      font-size: 50px !important
       line-height: 1.1
       color: #fff
       margin-bottom: 16px
@@ -410,15 +431,36 @@ body
   .noarticleimage
     .post-meta
       font-family: $font-sans
-      padding-top: 60px
+  // Breadcrumb styles (used above author section)
+  .post-breadcrumb
+    font-size: 16px
+    color: rgba(0,0,0,0.65)
+    margin: 8px 0 12px
+    a
+      color: rgba(0,0,0,0.65)
+      text-decoration: none
+      border-bottom: none
+      background-image: none
+      &:hover
+        color: #64a19d
+    .breadcrumb-arrow
+      display: inline-block
+      width: 14px
+      height: 14px
+      margin-right: 6px
+      position: relative
+      top: 2px
+      background: url('../assets/images/arrow.png') no-repeat center/contain
+    a:hover .breadcrumb-arrow
+      background-image: url('../assets/images/arrow_blue.png')
     .post-title
-      font-weight: 700
+      font-weight: 800
       font-style: normal
       letter-spacing: -0.04em
       font-size: 50px
       line-height: 1.1
-      color: #333332
-      margin-bottom: 16px
+      color: #212529
+      margin-bottom: 12px
     .author-image
       display: inline-block
       width: 30px
@@ -432,12 +474,13 @@ body
       text-indent: -9999px
     .author-name
       display: inline
+      font-size: 18px
     .post-meta-text
       color: #b3b3b1
       letter-spacing: -0.02em
       font-weight: 400
       font-style: normal
-      font-size: 14px
+      font-size: 16px
       overflow: hidden
       font-family: $font-sans
       white-space: nowrap
@@ -446,13 +489,15 @@ body
     width: 100%
     font-family: $font-sans
     color: #333
+    max-width: 1100px
+    margin: 0 auto
     h1, h2, h3
       font-family: $font-sans
     h3, h4, h5, h6
       letter-spacing: -0.02em
       font-weight: 700
       font-style: normal
-      font-size: 24px
+      font-size: 22px
       line-height: 1.3
       margin: 0
       font-family: $font-sans
@@ -461,15 +506,15 @@ body
       letter-spacing: -0.02em
       font-weight: 700
       font-style: normal
-      font-size: 32px
-      line-height: 1.2
+      font-size: 28px
+      line-height: 1.25
       padding-top: 31px
       margin-bottom: 4px
     p
       font-weight: 400
       font-style: normal
-      font-size: 22px
-      line-height: 30px
+      font-size: 18px
+      line-height: 28px
       margin: 0
       padding-bottom: 30px
       color: #333
@@ -478,7 +523,15 @@ body
       hyphens: auto
     a
       color: #333
-      text-decoration: underline
+      text-decoration: none
+      background-image: linear-gradient(#64a19d, #64a19d)
+      background-position: 0 100%
+      background-repeat: no-repeat
+      background-size: 0% 2px
+      transition: color 150ms ease, background-size 150ms ease
+      &:hover
+        color: #64a19d
+        background-size: 100% 2px
     img
       max-width: 100%
       margin: 0 auto
@@ -505,14 +558,18 @@ body
     blockquote
       margin: 0 0 30px
       margin-left: -26px
-      border-left: 3px solid #57ad68
+      border-left: 3px solid #64a19d
       padding-left: 20px
+      background: rgba(100,161,157,0.06)
+      border-radius: 8px
+      padding-top: 12px
+      padding-bottom: 12px
       p
         letter-spacing: 0.01rem
         font-weight: 400
         font-style: italic
-        mborder-left: 3px solid #57ad68
-        mpadding-left: 20px
+        mborder-left: 3px solid #64a19d
+        mpadding-left: 18px
         mmargin-left: -26px
         padding-bottom: 3px
     ul, ol
@@ -522,7 +579,7 @@ body
       padding: 0
       font-weight: 400
       font-style: normal
-      font-size: 23px
+      font-size: 18px
       line-height: 30px
       margin-left: 30px
       margin-bottom: 12px
@@ -532,7 +589,7 @@ body
     ol li
       list-style-type: decimal
   .bottom-teaser
-    padding: 50px 0
+    padding: 0 0
     font-family: $font-sans
     hr
       border: 0
@@ -550,7 +607,7 @@ body
         width: 100%
         padding-bottom: $rs*2
       .index-headline
-        padding-bottom: 32px
+        padding-bottom: 16px
       a
         color: #000
         text-decoration: none
@@ -569,7 +626,7 @@ body
         font-size: 18px
         line-height: 1.1
         font-weight: 700
-        padding: 0
+        padding: 8px 0 0 0
         margin: 0
         padding-left: 100px
       p
@@ -655,7 +712,7 @@ body
       text-shadow: 0px 1px 16px rgba(0,0,0,0.5), 0px 0px 1px rgba(0,0,0,0.5)
     .blog-description
       margin: 0 0 50px
-      padding: 0 $rs*2
+      padding: 0 0
       font-size: $rs/8*9
       line-height: 1.5
       color: #fff
